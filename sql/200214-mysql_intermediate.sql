@@ -148,29 +148,36 @@ WHERE CODE IN (
 	FROM city
 	WHERE population >= 8000000);
 
+## index: 데이터 검색할 때 빠르게 찾을 수 있도록 해주는 기능
+USE employees;
 
+EXPLAIN	# 실행계획
+SELECT COUNT(*)
+FROM salaries
+WHERE to_date > "2000-01-01";
 
+# 인덱스 추가
+CREATE INDEX tdate
+ON salaries(to_date);
 
+SELECT COUNT(*)
+FROM salaries
+WHERE to_date > "2000-01-01"; 
 
+# 인덱스 삭제
+DROP INDEX tdate
+ON salaries;
 
+# 인덱스는 저장공간을 차지하므로 적절하게 사용해야한다
 
+## view: 특정 query문에 대한 결과를 저장하는 개념
+USE world;
 
+CREATE VIcode_nameEW code_name AS
+SELECT CODE, NAME
+FROM country;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT *
+FROM city
+JOIN code_name
+ON city.CountryCode = code_name.code;
