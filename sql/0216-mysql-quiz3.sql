@@ -59,33 +59,31 @@ GROUP BY	countrycode
 HAVING language_count >= 5
 ORDER BY language_count DESC;
 
+USE world;
 # 6. 사용하는 언어가 3가지 이하인 국가중 도시인구가 300만 이상인 도시 조회
 # GROUP_CONCAT(LANGUAGE)이용
 # VIEW 이용하여 query를 깔끔하게 수정하기
-CREATE VIEW city_country AS 
-SELECT city.countrycode, city.NAME AS city_name, city.population, country.Name
-FROM city
-JOIN country
-ON city.countrycode = country.code
-WHERE city.population > 3000000
-ORDER BY population DESC;
-
-/*SELECT city_country.countrycode, city_country.city_name, city_country.population, city_country.NAME, 
-	count(countrylanguage.Language) as language_count, 
-	GROUP_CONCAT(countrylanguage.Language) as languages
+CREATE VIEW city_lang AS
+(SELECT city.countrycode, city.NAME AS city_name, city.population,
+	lang.language_count, lang.languages
+FROM (
+SELECT countrycode, COUNT(LANGUAGE) AS language_count, 
+	GROUP_CONCAT(LANGUAGE) AS languages
 FROM countrylanguage
-JOIN city_country
-ON countrylanguage.countrycode = city_country.countrycode
-GROUP BY countrylanguage.countrycode;*/
+GROUP BY countrycode
+HAVING language_count <= 3) AS lang
+JOIN (
+	SELECT countrycode, NAME, population
+	FROM city
+	WHERE population >= 3000000) AS city
+ON lang.countrycode = city.countrycode);
 
+SELECT *
+FROM city_lang;
 
-
-
-
-
-
-
-
-
-
-
+SELECT cl.countrycode, cl.city_name, cl.population, 
+	country.name, cl.language_count, cl.languages
+FROM city_lang AS cl
+JOIN country
+ON cl.countrycode = country.code
+ORDER BY population DESC;
