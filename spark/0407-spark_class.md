@@ -3,11 +3,12 @@ spark : local
 spark2 : spark standalone
 spark3 : yarn
 
--> interpreter 설정 시, core수를 설정해야함
-(spark.cores.max : yarn에서 안먹힘
-spark.executor.cores : yarn에서 먹힘
--> cd /pearl/spark2/bin/spark-shell --help
-: spark-shell에 대한 도움말 보기
+- interpreter 설정 시, core수를 설정해야함
+
+(spark.cores.max : yarn에서 안먹힘 / spark.executor.cores : yarn에서 먹힘)
+
+- cd /pearl/spark2/bin/spark-shell --help : spark-shell에 대한 도움말 보기
+
 ---
 * spark api documents 
 : https://spark.apache.org/docs/latest/api/scala/
@@ -29,7 +30,8 @@ spark.executor.cores : yarn에서 먹힘
 
 * 그 경로에 뭐가 있는지 보기
 ```%sh
-ls -al /home/hadoop/spark-warehouse````
+ls -al /home/hadoop/spark-warehouse
+```
 
 * 컬럼명을 적절하게 바꿔서 데이터웨어하우스에 저장하기
 `df2.toDF("Year", "Month", "avg_flightNum", "min_flightNum", "max_flightNum", "cnt_flight").write.mode("overwrite").saveAsTable("df2")`
