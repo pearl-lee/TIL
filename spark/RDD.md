@@ -10,12 +10,12 @@
 - 드라이버 프로그램 내에서 생성된 collection을 parallelize()라는 메서드을 이용해서 RDD화 하는 방	- 자바컬렉션 등을 RDD로 생성
 
 ### RDD Operations
-1. Transformation(변환)
+#### 1. Transformation(변환)
 - RDD를 필터링하거나 변환하여 새로운 RDD를 리턴하는 오퍼레이션
 - filter, map, group
 - [변환 함수리스트](https://spark.apache.org/docs/1.2.0/programming-guide.html#transformations)
 
-```python
+```
 >>> f = sc.textFile("README.md")
 >>> t = f.filter(lambda x: "Apache" in x)
 >>> for l in t.collect():
@@ -30,7 +30,7 @@ Spark is built using [Apache Maven](http://maven.apche.org/).
 - f라는 RDD에서 "Apache"라는 문자열을 가진 라인만을 모아서 t라는 RDD를 새롭게 생성한 후 화면으로 출력하는 예제.
 - f와 t는 전혀 다른 RDD로 RDD t는 filter에 의해서 새롭게 생성되었다
 
-2. Action(액션)
+#### 2. Action(액션)
 - RDD를 가지고 계산해서 최종 결과를 리턴하거나 데이터를 외부 저장소에 쓸 수 있음
 - 최종결과를 리턴하는 오퍼레이션 : count(), first
 - RDD를 저장하는 오퍼레이션 : saveAsTextFile(path) 
