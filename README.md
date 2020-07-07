@@ -7,5 +7,6 @@
 - Machine Learning
 - SQL
 - Web Crawling
+- Database
 
 **파이팅**
