@@ -22,5 +22,6 @@ tt.forward(100)
 tt.left(90)
 tt.forward(100)
 # 직각주차장 ㅠ_ㅠ
+# github에 push가 안된다
 
 time.sleep(5)
