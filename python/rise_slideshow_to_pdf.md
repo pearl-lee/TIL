@@ -14,3 +14,5 @@
 4. pdf 파일로 저장하기
 
     `cmd + p`
+
+[출처]https://rise.readthedocs.io/en/stable/exportpdf.html
